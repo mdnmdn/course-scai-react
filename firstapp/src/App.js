@@ -6,6 +6,8 @@ import HelloBig from './components/HelloBig';
 import Border from './components/Border';
 import NameList from './components/NameList';
 import Ticker from './components/Ticker';
+import If from './components/If';
+import TabPage from './components/TabPage';
 
 const data = [
   { id: 5, name: 'pippo'},
@@ -28,20 +30,38 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo"
            />                    
         </header>
+        <TabPage />
+{/*
+        <IfElse 
+          condition={true}
 
-        <Ticker />
-        <NameList data={data} />
-        
-        <a href="" >ciao</a>
+          then={
+            ()  => <span>vero</span>
+          }
 
-        <Border borderCss="border-blue" 
-          visible={false} >
+          else={
+            () => <span>false</span>
+          }
+        />
+        */}
+        <If condition={false} >
+          <hr />
+          <Ticker />
+          <Ticker />
+          <Ticker />
+          <NameList data={data} />
           
-          <Hello name="pippo" />
-          <Hello name="pluto" />
-          <HelloBig />
-          <HelloBig name="pino" />
-        </Border>
+          <a href="" >ciao</a>
+
+          <Border borderCss="border-blue" 
+            visible={false} >
+            
+            <Hello name="pippo" />
+            <Hello name="pluto" />
+            <HelloBig />
+            <HelloBig name="pino" />
+          </Border>
+        </If>
       </div>
     );
   }
