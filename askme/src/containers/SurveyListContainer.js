@@ -16,20 +16,44 @@ class SurveyListContainer extends React.Component {
     }
 
     async componentDidMount(){
-        const result = await api.listSurveys();
-        console.log('api: ', result);
+        await this.loadData(0);
+    }
+
+    async loadData(page){
         this.setState({ 
-            loading: false,
+            loading: true,                        
+        });
+
+        const pageSize = 10;
+        const result = await api.listSurveys({
+            first: page * pageSize,
+            count: pageSize,
+        });
+
+        console.log('api: ', result);
+
+        this.setState({ 
+            loading: false,            
             rows: result,
         });
+    }
+
+    changePage(newPage) {
+        this.setState({ page: newPage });
+        this.loadData(newPage);
     }
 
     render() {
 
         let contents = 'loading...';
-        
+
         if (!this.state.loading){
-             contents = (<SurveyGrid rows={this.state.rows} />);
+             contents = (
+                <SurveyGrid 
+                    rows={this.state.rows} 
+                    currentPage={this.state.page}
+                    onChangePage={newPage => this.changePage(newPage)} />
+                );
         }
 
         return (<div>

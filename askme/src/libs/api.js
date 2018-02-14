@@ -21,8 +21,9 @@ const callFetch = async (apiUrl, options = {}) => {
 
 const api = {};
 
-api.listSurveys = async () => {
-    return callFetch('survey/list');
+api.listSurveys = async ({first, count}) => {
+    const parameters = '?first=' + first + '&count=' + count
+    return callFetch('survey/list' + parameters);
 };
 
 
