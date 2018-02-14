@@ -13,6 +13,7 @@ const SurveyGrid = ({ rows }) => {
 
     return (
         <table className="table table-bordered table-condensed table-striped table-hover">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -20,7 +21,10 @@ const SurveyGrid = ({ rows }) => {
                 <th>Questions</th>
                 <th></th>
             </tr>
-            {contents}
+            </thead>
+            <tbody>
+                {contents}
+            </tbody>
         </table>
     );
 };
