@@ -1,6 +1,15 @@
 import React from 'react';
 
-const SurveyGrid = (props) => {
+const SurveyGrid = ({ rows }) => {
+
+    const contents = rows.map( row => (
+        <tr>
+            <td>{row.id}</td>
+            <td>{row.name}</td>
+            <td>{row.active ? 'v' : ''}</td>
+            <td>{row.numberOfQuestions}</td>
+            <td></td>
+        </tr>));
 
     return (
         <table className="table table-bordered table-condensed table-striped table-hover">
@@ -11,7 +20,7 @@ const SurveyGrid = (props) => {
                 <th>Questions</th>
                 <th></th>
             </tr>
-
+            {contents}
         </table>
     );
 };

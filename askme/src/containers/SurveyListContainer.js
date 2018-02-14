@@ -9,20 +9,31 @@ class SurveyListContainer extends React.Component {
         super(props);
 
         this.state = {
-
+            loading: true,
+            rows: [],
+            page: 0,
         };
     }
 
     async componentDidMount(){
         const result = await api.listSurveys();
         console.log('api: ', result);
+        this.setState({ 
+            loading: false,
+            rows: result,
+        });
     }
 
     render() {
 
+        let contents = 'loading...';
+        
+        if (!this.state.loading){
+             contents = (<SurveyGrid rows={this.state.rows} />);
+        }
+
         return (<div>
-            <SurveyGrid />
-            
+            {contents}
         </div>);
 
     }
