@@ -3,6 +3,7 @@ import React from 'react';
 import api from '../libs/api';
 
 import SurveyGrid from '../components/SurveyGrid';
+import SurveyFilterContainer from './SurveyFilterContainer';
 
 class SurveyListContainer extends React.Component {
     constructor(props){
@@ -19,13 +20,23 @@ class SurveyListContainer extends React.Component {
         await this.loadData(0);
     }
 
-    async loadData(page){
-        this.setState({ 
-            loading: true,                        
+    filterData(filter){
+        this.loadData(0, filter);
+    }
+
+    async loadData(page, filter = {}){
+
+        let search = filter.search || this.state.search;
+
+        this.setState({             
+            loading: true,   
+            page,
+            search,
         });
 
         const pageSize = 10;
         const result = await api.listSurveys({
+            search: search || '',
             first: page * pageSize,
             count: pageSize,
         });
@@ -38,8 +49,7 @@ class SurveyListContainer extends React.Component {
         });
     }
 
-    changePage(newPage) {
-        this.setState({ page: newPage });
+    changePage(newPage) {        
         this.loadData(newPage);
     }
 
@@ -57,6 +67,9 @@ class SurveyListContainer extends React.Component {
         }
 
         return (<div>
+            <SurveyFilterContainer 
+                onFilter={filter => this.filterData(filter)}
+                />
             {contents}
         </div>);
 
