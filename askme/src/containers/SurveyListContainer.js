@@ -24,9 +24,12 @@ class SurveyListContainer extends React.Component {
         this.loadData(0, filter);
     }
 
-    async loadData(page, filter = {}){
+    async loadData(page, filter){
 
-        let search = filter.search || this.state.search;
+        let search = this.state.search;
+        if (filter){
+            search = filter.search;
+        }
 
         this.setState({             
             loading: true,   
