@@ -20,10 +20,22 @@ class SurveyFilterContainer extends React.Component {
         }
     }
 
+    clearFilter(){
+        this.setState({ search: ''},
+            () => this.filter()
+        );
+    }
+
     onInputChange(input, e){
         const newState = {};
         newState[input] = e.target.value;
         this.setState(newState);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.search != this.state.search){
+            this.setState({ search: nextProps.search });
+        }
     }
 
     render(){

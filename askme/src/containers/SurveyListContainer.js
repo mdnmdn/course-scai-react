@@ -71,6 +71,7 @@ class SurveyListContainer extends React.Component {
 
         return (<div>
             <SurveyFilterContainer 
+                
                 onFilter={filter => this.filterData(filter)}
                 />
             {contents}
